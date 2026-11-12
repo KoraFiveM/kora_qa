@@ -1,0 +1,423 @@
+{
+ "generated": "kora_qa/shared/ui-ids.json from a static scan of RES_DIR (registerApp ids, openMenu/openInputDialog titles). Dynamic ids/titles are not listed.",
+ "apps": [
+  {
+   "id": "qbadmin:config",
+   "title": "Configuration",
+   "resource": "kora_admin",
+   "file": "[kora]/kora_admin/client/config_editor.lua"
+  },
+  {
+   "id": "qbadmin:menu",
+   "title": null,
+   "resource": "kora_admin",
+   "file": "[kora]/kora_admin/client/menu.lua"
+  },
+  {
+   "id": "qbadmin:myreports",
+   "title": "My Reports",
+   "resource": "kora_admin",
+   "file": "[kora]/kora_admin/client/report_chat.lua"
+  },
+  {
+   "id": "qbbanking:bank",
+   "title": "Banking",
+   "resource": "kora_banking",
+   "file": "[kora]/kora_banking/client.lua"
+  },
+  {
+   "id": "qbbossmenu:management",
+   "title": null,
+   "resource": "kora_bossmenu",
+   "file": "[kora]/kora_bossmenu/client/main.lua"
+  },
+  {
+   "id": "qb-hotdogjob:stock",
+   "title": "Hot Dog Cart",
+   "resource": "kora_businesses",
+   "file": "[kora]/kora_businesses/jobs/hotdog/client.lua"
+  },
+  {
+   "id": "qbbusinesses:cctv-laptop",
+   "title": "CCTV Engineer Laptop",
+   "resource": "kora_businesses",
+   "file": "[kora]/kora_businesses/jobs/cctv/client.lua"
+  },
+  {
+   "id": "qbcards:city-legends",
+   "title": null,
+   "resource": "kora_cards",
+   "file": "[kora]/kora_cards/client/main.lua"
+  },
+  {
+   "id": "qb-cityhall:kiosk",
+   "title": null,
+   "resource": "kora_cityhall",
+   "file": "[kora]/kora_cityhall/client/client.lua"
+  },
+  {
+   "id": "qbcrafting:creator",
+   "title": "Crafting Creator",
+   "resource": "kora_crafting",
+   "file": "[kora]/kora_crafting/client/creator.lua"
+  },
+  {
+   "id": "qbcrafting:menu",
+   "title": "Crafting",
+   "resource": "kora_crafting",
+   "file": "[kora]/kora_crafting/client/craft.lua"
+  },
+  {
+   "id": "qbcustoms:shop",
+   "title": "Custom Shop",
+   "resource": "kora_customs",
+   "file": "[kora]/kora_customs/client/main.lua"
+  },
+  {
+   "id": "qbdealership:creator",
+   "title": null,
+   "resource": "kora_dealership",
+   "file": "[kora]/kora_dealership/client/creator.lua"
+  },
+  {
+   "id": "qbdealership:management",
+   "title": "Dealership Management",
+   "resource": "kora_dealership",
+   "file": "[kora]/kora_dealership/client/Management.lua"
+  },
+  {
+   "id": "qbdealership:offer-amount",
+   "title": null,
+   "resource": "kora_dealership",
+   "file": "[kora]/kora_dealership/client/customer.lua"
+  },
+  {
+   "id": "qbdealership:offer-terms",
+   "title": null,
+   "resource": "kora_dealership",
+   "file": "[kora]/kora_dealership/client/customer.lua"
+  },
+  {
+   "id": "qbdealership:sales",
+   "title": null,
+   "resource": "kora_dealership",
+   "file": "[kora]/kora_dealership/client/sales.lua"
+  },
+  {
+   "id": "qbdealership:showroom",
+   "title": "Dealership Showroom",
+   "resource": "kora_dealership",
+   "file": "[kora]/kora_dealership/client/customer.lua"
+  },
+  {
+   "id": "qbdispatch:tablet",
+   "title": "Live operations",
+   "resource": "kora_dispatch",
+   "file": "[kora]/kora_dispatch/client/ui.lua"
+  },
+  {
+   "id": "qbdoorlock:creator",
+   "title": null,
+   "resource": "kora_doorlock",
+   "file": "[kora]/kora_doorlock/client/creator.lua"
+  },
+  {
+   "id": "qbdrugs:cornerOffer",
+   "title": "Offer",
+   "resource": "kora_drugs",
+   "file": "[kora]/kora_drugs/client/Cornerselling.lua"
+  },
+  {
+   "id": "qbdrugs:creator",
+   "title": "Drug Creator",
+   "resource": "kora_drugs",
+   "file": "[kora]/kora_drugs/client/creator.lua"
+  },
+  {
+   "id": "qbemotemenu:menu",
+   "title": "Emotes",
+   "resource": "kora_emotemenu",
+   "file": "[standalone]/kora_emotemenu/client/main.lua"
+  },
+  {
+   "id": "qb-fishing:catalog",
+   "title": "Fishing Catalog",
+   "resource": "kora_fishing",
+   "file": "[kora]/kora_fishing/client/client_catalog.lua"
+  },
+  {
+   "id": "qbfishing:breakdown",
+   "title": "Refine your catch",
+   "resource": "kora_fishing",
+   "file": "[kora]/kora_fishing/client/breakdown.lua"
+  },
+  {
+   "id": "qbfishing:buyer",
+   "title": "Sell your catch",
+   "resource": "kora_fishing",
+   "file": "[kora]/kora_fishing/client/sales.lua"
+  },
+  {
+   "id": "qbfishing:shop",
+   "title": "Fishing Shop",
+   "resource": "kora_fishing",
+   "file": "[kora]/kora_fishing/client/shops.lua"
+  },
+  {
+   "id": "qbfuel:pump",
+   "title": null,
+   "resource": "kora_fuel",
+   "file": "[kora]/kora_fuel/client/main.lua"
+  },
+  {
+   "id": "qbgarages:garage",
+   "title": "Your vehicles",
+   "resource": "kora_garages",
+   "file": "[kora]/kora_garages/client/client.lua"
+  },
+  {
+   "id": "qbjobcreator:management",
+   "title": null,
+   "resource": "kora_jobcreator",
+   "file": "[kora]/kora_jobcreator/client/creator.lua"
+  },
+  {
+   "id": "kora_lib:blips",
+   "title": "Blip settings",
+   "resource": "kora_lib",
+   "file": "[pre]/kora_lib/modules/blips/settings.lua"
+  },
+  {
+   "id": "kora_lib:config",
+   "title": "Server settings",
+   "resource": "kora_lib",
+   "file": "[pre]/kora_lib/modules/config/editor_client.lua"
+  },
+  {
+   "id": "qbmdt:terminal",
+   "title": "Citizen search",
+   "resource": "kora_mdt",
+   "file": "[kora]/kora_mdt/client/terminal.lua"
+  },
+  {
+   "id": "qbmetaldetecting:catalog",
+   "title": "Metal Detecting Catalog",
+   "resource": "kora_metaldetecting",
+   "file": "[kora]/kora_metaldetecting/client/catalog.lua"
+  },
+  {
+   "id": "qbmetaldetecting:shop",
+   "title": "Metal Detector Shop",
+   "resource": "kora_metaldetecting",
+   "file": "[kora]/kora_metaldetecting/client/shop.lua"
+  },
+  {
+   "id": "kora_mining:creator",
+   "title": "Mining Creator",
+   "resource": "kora_mining",
+   "file": "[kora]/kora_mining/client/creator.lua"
+  },
+  {
+   "id": "kora_mining:pickaxeShop",
+   "title": "Mining Pickaxes",
+   "resource": "kora_mining",
+   "file": "[kora]/kora_mining/client/pickaxe_shop.lua"
+  },
+  {
+   "id": "kora_mining:smelting",
+   "title": "Smelting",
+   "resource": "kora_mining",
+   "file": "[kora]/kora_mining/client/smelting.lua"
+  },
+  {
+   "id": "qbmultijob:roster",
+   "title": "Employment",
+   "resource": "kora_multijob",
+   "file": "[kora]/kora_multijob/client.lua"
+  },
+  {
+   "id": "qb-newsjob:garage",
+   "title": "Weazel News Garage",
+   "resource": "kora_newsjob",
+   "file": "[kora]/kora_newsjob/client/spawner.lua"
+  },
+  {
+   "id": "qb-pawnshop:app",
+   "title": "Pawn Store",
+   "resource": "kora_pawnshop",
+   "file": "[kora]/kora_pawnshop/client/client.lua"
+  },
+  {
+   "id": "kora_qa:runner",
+   "title": "QA runner",
+   "resource": "kora_qa",
+   "file": "[kora]/kora_qa/client/ui.lua"
+  },
+  {
+   "id": "qbrobberies:creator",
+   "title": "Robbery Creator",
+   "resource": "kora_robberies",
+   "file": "[kora]/kora_robberies/client/creator.lua"
+  },
+  {
+   "id": "qb-scoreboard:app",
+   "title": "Scoreboard",
+   "resource": "kora_scoreboard",
+   "file": "[kora]/kora_scoreboard/client/client.lua"
+  },
+  {
+   "id": "qbscrapyard:vehicleList",
+   "title": null,
+   "resource": "kora_scrapyard",
+   "file": "[kora]/kora_scrapyard/client/vehiclelist.lua"
+  },
+  {
+   "id": "qbskills:progression",
+   "title": "Skills",
+   "resource": "kora_skills",
+   "file": "[kora]/kora_skills/client/main.lua"
+  },
+  {
+   "id": "qbtruckerjob:dispatch",
+   "title": "Freight Depot",
+   "resource": "kora_truckerjob",
+   "file": "[kora]/kora_truckerjob/client/client.lua"
+  }
+ ],
+ "menus": [
+  {
+   "title": "Apply: %s",
+   "kind": "input",
+   "resource": "kora_bossmenu",
+   "file": "[kora]/kora_bossmenu/client/main.lua:83",
+   "dynamic": true
+  },
+  {
+   "title": "Customise bumpers",
+   "kind": "input",
+   "resource": "kora_businesses",
+   "file": "[kora]/kora_businesses/jobs/mechanic/client.lua:161",
+   "dynamic": false
+  },
+  {
+   "title": "Respray vehicle",
+   "kind": "input",
+   "resource": "kora_businesses",
+   "file": "[kora]/kora_businesses/jobs/mechanic/client.lua:151",
+   "dynamic": false
+  },
+  {
+   "title": "%s prices",
+   "kind": "menu",
+   "resource": "kora_jobcreator",
+   "file": "[kora]/kora_jobcreator/client/payment.lua:94",
+   "dynamic": true
+  },
+  {
+   "title": "Set a price",
+   "kind": "input",
+   "resource": "kora_jobcreator",
+   "file": "[kora]/kora_jobcreator/client/payment.lua:13",
+   "dynamic": false
+  },
+  {
+   "title": "Take a payment",
+   "kind": "input",
+   "resource": "kora_jobcreator",
+   "file": "[kora]/kora_jobcreator/client/payment.lua:25",
+   "dynamic": false
+  },
+  {
+   "title": "New smelting recipe",
+   "kind": "input",
+   "resource": "kora_mining",
+   "file": "[kora]/kora_mining/client/creator.lua:527",
+   "dynamic": false
+  },
+  {
+   "title": "%s wants to share their number",
+   "kind": "menu",
+   "resource": "kora_phone-stevie",
+   "file": "[kora]/kora_phone-stevie/client/share.lua:80",
+   "dynamic": true
+  },
+  {
+   "title": "Share your number",
+   "kind": "input",
+   "resource": "kora_phone-stevie",
+   "file": "[kora]/kora_phone-stevie/client/share.lua:40",
+   "dynamic": false
+  },
+  {
+   "title": "Book Suspect",
+   "kind": "input",
+   "resource": "kora_police",
+   "file": "[kora]/kora_police/client/compat.lua:79",
+   "dynamic": false
+  },
+  {
+   "title": "Evidence Stash | %d",
+   "kind": "input",
+   "resource": "kora_police",
+   "file": "[kora]/kora_police/client/compat.lua:215",
+   "dynamic": true
+  },
+  {
+   "title": "Flag %s",
+   "kind": "input",
+   "resource": "kora_police",
+   "file": "[kora]/kora_police/client/plate_flag.lua:17",
+   "dynamic": true
+  },
+  {
+   "title": "Issue Citation",
+   "kind": "input",
+   "resource": "kora_police",
+   "file": "[kora]/kora_police/client/compat.lua:90",
+   "dynamic": false
+  },
+  {
+   "title": "Retrieve Vehicle",
+   "kind": "input",
+   "resource": "kora_police",
+   "file": "[kora]/kora_police/client/impound.lua:58",
+   "dynamic": false
+  },
+  {
+   "title": "Change list",
+   "kind": "input",
+   "resource": "kora_robberies",
+   "file": "[kora]/kora_robberies/client/creator.lua:927",
+   "dynamic": false
+  },
+  {
+   "title": "Enter Safe Code",
+   "kind": "input",
+   "resource": "kora_robberies",
+   "file": "[kora]/kora_robberies/client/store.lua:57",
+   "dynamic": false
+  },
+  {
+   "title": "Register settings",
+   "kind": "input",
+   "resource": "kora_robberies",
+   "file": "[kora]/kora_robberies/client/creator.lua:1060",
+   "dynamic": false
+  },
+  {
+   "title": "Search settings",
+   "kind": "input",
+   "resource": "kora_robberies",
+   "file": "[kora]/kora_robberies/client/creator.lua:911",
+   "dynamic": false
+  },
+  {
+   "title": "Radio",
+   "kind": "input",
+   "resource": "kora_voice",
+   "file": "[standalone]/kora_voice/client/radio_item.lua:30",
+   "dynamic": false
+  }
+ ],
+ "note": "Use apps[].id with `the \"<id>\" app opens` / `the \"<id>\" app should be open`; menus[].title with `a menu titled \"<title>\" opens` (dynamic titles contain %s and cannot be matched exactly)."
+}

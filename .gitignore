@@ -1,0 +1,7 @@
+queue/*
+!queue/.gitkeep
+!queue/shots/
+queue/shots/*
+!queue/shots/.gitkeep
+data/*
+!data/.gitkeep

@@ -1,0 +1,1975 @@
+[
+  {
+    "id": "items.have",
+    "pattern": "I have {int} {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets the amount of an item in my inventory to exactly N (adds or removes the difference).",
+    "args": [
+      {
+        "name": "count",
+        "type": "int",
+        "cap": "maxItemCount",
+        "min": 1
+      },
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": true,
+    "example": "Given I have 3 \"water\""
+  },
+  {
+    "id": "items.have_meta",
+    "pattern": "I have {int} {string} with {string} set to {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Gives N of an item with one metadata (info) field set. Existing stacks are kept.",
+    "args": [
+      {
+        "name": "count",
+        "type": "int",
+        "cap": "maxItemCount",
+        "min": 1
+      },
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "metadataKeys"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "maxLength": 100
+      }
+    ],
+    "undo": true,
+    "example": "Given I have 1 \"fishingrod\" with \"quality\" set to \"50\""
+  },
+  {
+    "id": "items.none",
+    "pattern": "I have no {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Removes every unit of the item from my inventory.",
+    "args": [
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": true,
+    "example": "Given I have no \"lockpick\""
+  },
+  {
+    "id": "inventory.empty",
+    "pattern": "my inventory is empty",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Clears my inventory; the whole inventory is restored after the run.",
+    "args": [],
+    "undo": true,
+    "example": "Given my inventory is empty"
+  },
+  {
+    "id": "money.set",
+    "pattern": "my {word} balance is {int}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets a money account (cash, bank, ...) to exactly N.",
+    "args": [
+      {
+        "name": "account",
+        "type": "word",
+        "allow": "accounts"
+      },
+      {
+        "name": "amount",
+        "type": "int",
+        "cap": "maxMoney",
+        "min": 0
+      }
+    ],
+    "undo": true,
+    "example": "Given my cash balance is 500"
+  },
+  {
+    "id": "money.at_least",
+    "pattern": "my {word} balance is at least {int}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Tops a money account up to N if it holds less.",
+    "args": [
+      {
+        "name": "account",
+        "type": "word",
+        "allow": "accounts"
+      },
+      {
+        "name": "amount",
+        "type": "int",
+        "cap": "maxMoney",
+        "min": 0
+      }
+    ],
+    "undo": true,
+    "example": "Given my bank balance is at least 10000"
+  },
+  {
+    "id": "job.set",
+    "pattern": "my job is {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets my job at grade 1.",
+    "args": [
+      {
+        "name": "job",
+        "type": "string",
+        "allow": "jobs"
+      }
+    ],
+    "undo": true,
+    "example": "Given my job is \"police\""
+  },
+  {
+    "id": "job.set_grade",
+    "pattern": "my job is {string} at grade {int}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets my job at a grade (grades are 1-based).",
+    "args": [
+      {
+        "name": "job",
+        "type": "string",
+        "allow": "jobs"
+      },
+      {
+        "name": "grade",
+        "type": "int",
+        "min": 1,
+        "max": 20
+      }
+    ],
+    "undo": true,
+    "example": "Given my job is \"police\" at grade 3"
+  },
+  {
+    "id": "job.on_duty",
+    "pattern": "I am on duty",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Puts me on duty for my current job.",
+    "args": [],
+    "undo": true,
+    "example": "Given I am on duty"
+  },
+  {
+    "id": "job.off_duty",
+    "pattern": "I am off duty",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Puts me off duty for my current job.",
+    "args": [],
+    "undo": true,
+    "example": "Given I am off duty"
+  },
+  {
+    "id": "gang.set",
+    "pattern": "my gang is {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets my gang at grade 1.",
+    "args": [
+      {
+        "name": "gang",
+        "type": "string",
+        "allow": "gangs"
+      }
+    ],
+    "undo": true,
+    "example": "Given my gang is \"ballas\""
+  },
+  {
+    "id": "gang.set_grade",
+    "pattern": "my gang is {string} at grade {int}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets my gang at a grade (1-based).",
+    "args": [
+      {
+        "name": "gang",
+        "type": "string",
+        "allow": "gangs"
+      },
+      {
+        "name": "grade",
+        "type": "int",
+        "min": 1,
+        "max": 20
+      }
+    ],
+    "undo": true,
+    "example": "Given my gang is \"ballas\" at grade 2"
+  },
+  {
+    "id": "metadata.set",
+    "pattern": "my metadata {string} is {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets a player metadata value (numbers and true/false are converted).",
+    "args": [
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "metadataKeys"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "maxLength": 100
+      }
+    ],
+    "undo": true,
+    "example": "Given my metadata \"hunger\" is \"20\""
+  },
+  {
+    "id": "teleport.location",
+    "pattern": "I am at {string}",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Teleports me to a named location from tests/qa.lua; I am returned after the run.",
+    "args": [
+      {
+        "name": "location",
+        "type": "string",
+        "allow": "locations"
+      }
+    ],
+    "undo": true,
+    "example": "Given I am at \"fishing_pier\""
+  },
+  {
+    "id": "teleport.coords",
+    "pattern": "I am at {float}, {float}, {float}",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Teleports me to coordinates; I am returned after the run.",
+    "args": [
+      {
+        "name": "x",
+        "type": "float",
+        "min": -10000,
+        "max": 10000
+      },
+      {
+        "name": "y",
+        "type": "float",
+        "min": -10000,
+        "max": 10000
+      },
+      {
+        "name": "z",
+        "type": "float",
+        "min": -500,
+        "max": 3000
+      }
+    ],
+    "undo": true,
+    "example": "Given I am at -1850.5, -1231.2, 13.0"
+  },
+  {
+    "id": "teleport.coords_heading",
+    "pattern": "I am at {float}, {float}, {float} facing {float}",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Teleports me to coordinates with a heading; I am returned after the run.",
+    "args": [
+      {
+        "name": "x",
+        "type": "float",
+        "min": -10000,
+        "max": 10000
+      },
+      {
+        "name": "y",
+        "type": "float",
+        "min": -10000,
+        "max": 10000
+      },
+      {
+        "name": "z",
+        "type": "float",
+        "min": -500,
+        "max": 3000
+      },
+      {
+        "name": "heading",
+        "type": "float",
+        "min": 0,
+        "max": 360
+      }
+    ],
+    "undo": true,
+    "example": "Given I am at -1850.5, -1231.2, 13.0 facing 90"
+  },
+  {
+    "id": "vehicle.spawn",
+    "pattern": "a {string} is spawned in front of me",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Spawns a vehicle (model or alias) in front of me. It becomes \"the vehicle\" and is deleted after the run.",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "vehicles"
+      }
+    ],
+    "undo": true,
+    "example": "Given a \"sultan\" is spawned in front of me",
+    "entities": 1
+  },
+  {
+    "id": "vehicle.spawn_keys",
+    "pattern": "a {string} is spawned in front of me with keys",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Spawns a vehicle in front of me and gives me its keys.",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "vehicles"
+      }
+    ],
+    "undo": true,
+    "example": "Given a \"sultan\" is spawned in front of me with keys",
+    "entities": 1
+  },
+  {
+    "id": "vehicle.driver",
+    "pattern": "I am in the driver seat of a {string}",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Spawns a vehicle, gives me its keys and puts me in the driver seat.",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "vehicles"
+      }
+    ],
+    "undo": true,
+    "example": "Given I am in the driver seat of a \"sultan\"",
+    "entities": 1
+  },
+  {
+    "id": "vehicle.keys",
+    "pattern": "I have the keys to the vehicle",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Gives me the keys to the vehicle (the last spawned one, or the one I am in).",
+    "args": [],
+    "undo": true,
+    "example": "Given I have the keys to the vehicle"
+  },
+  {
+    "id": "vehicle.fuel",
+    "pattern": "the vehicle has {int}% fuel",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets the vehicle's fuel level.",
+    "args": [
+      {
+        "name": "percent",
+        "type": "int",
+        "min": 0,
+        "max": 100
+      }
+    ],
+    "undo": false,
+    "example": "Given the vehicle has 5% fuel"
+  },
+  {
+    "id": "vehicle.engine",
+    "pattern": "the vehicle engine health is {int}",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets the vehicle's engine health (0-1000, 1000 = undamaged).",
+    "args": [
+      {
+        "name": "health",
+        "type": "int",
+        "min": 0,
+        "max": 1000
+      }
+    ],
+    "undo": false,
+    "example": "Given the vehicle engine health is 300"
+  },
+  {
+    "id": "vehicle.locked",
+    "pattern": "the vehicle is locked",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Locks the vehicle (kora_vehiclekeys lock state).",
+    "args": [],
+    "undo": true,
+    "example": "And the vehicle is locked"
+  },
+  {
+    "id": "vehicle.unlocked",
+    "pattern": "the vehicle is unlocked",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Unlocks the vehicle (kora_vehiclekeys lock state).",
+    "args": [],
+    "undo": true,
+    "example": "And the vehicle is unlocked"
+  },
+  {
+    "id": "ped.spawn",
+    "pattern": "a {string} ped is spawned in front of me",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Spawns a frozen, invincible ped (model or alias) in front of me; deleted after the run.",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "peds"
+      }
+    ],
+    "undo": true,
+    "example": "Given a \"a_m_y_business_01\" ped is spawned in front of me",
+    "entities": 1
+  },
+  {
+    "id": "ped.spawn_scenario",
+    "pattern": "a {string} ped is spawned in front of me doing {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Spawns a ped in front of me playing a GTA scenario (e.g. WORLD_HUMAN_SMOKING).",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "peds"
+      },
+      {
+        "name": "scenario",
+        "type": "string",
+        "allow": "pedScenarios"
+      }
+    ],
+    "undo": true,
+    "example": "Given a \"a_m_y_business_01\" ped is spawned in front of me doing \"WORLD_HUMAN_SMOKING\"",
+    "entities": 1
+  },
+  {
+    "id": "prop.spawn",
+    "pattern": "a {string} prop is spawned in front of me",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Spawns a frozen prop (model or alias) in front of me; deleted after the run.",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "props"
+      }
+    ],
+    "undo": true,
+    "example": "Given a \"prop_bench_01a\" prop is spawned in front of me",
+    "entities": 1
+  },
+  {
+    "id": "weapon.equip",
+    "pattern": "I have a {string} equipped",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Gives me the weapon item and equips it; removed after the run.",
+    "args": [
+      {
+        "name": "weapon",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": true,
+    "example": "Given I have a \"weapon_pistol\" equipped"
+  },
+  {
+    "id": "weapon.equip_ammo",
+    "pattern": "I have a {string} equipped with {int} ammo",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Gives me the weapon item with ammo and equips it; removed after the run.",
+    "args": [
+      {
+        "name": "weapon",
+        "type": "string",
+        "allow": "items"
+      },
+      {
+        "name": "ammo",
+        "type": "int",
+        "min": 0,
+        "max": 500
+      }
+    ],
+    "undo": true,
+    "example": "Given I have a \"weapon_pistol\" equipped with 30 ammo"
+  },
+  {
+    "id": "health.full",
+    "pattern": "I am at full health",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Revives me if needed and sets full health.",
+    "args": [],
+    "undo": false,
+    "example": "Given I am at full health"
+  },
+  {
+    "id": "health.revived",
+    "pattern": "I am revived",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Revives me (also clears the ambulance job's downed state).",
+    "args": [],
+    "undo": false,
+    "example": "Given I am revived"
+  },
+  {
+    "id": "health.dead",
+    "pattern": "I am dead",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Kills my character; I am revived after the run.",
+    "args": [],
+    "undo": true,
+    "example": "Given I am dead"
+  },
+  {
+    "id": "health.percent",
+    "pattern": "my health is {int}%",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets my health as a percentage (1-100).",
+    "args": [
+      {
+        "name": "percent",
+        "type": "int",
+        "min": 1,
+        "max": 100
+      }
+    ],
+    "undo": true,
+    "example": "Given my health is 40%"
+  },
+  {
+    "id": "health.armour",
+    "pattern": "my armour is {int}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets my armour (0-100).",
+    "args": [
+      {
+        "name": "armour",
+        "type": "int",
+        "min": 0,
+        "max": 100
+      }
+    ],
+    "undo": true,
+    "example": "Given my armour is 100"
+  },
+  {
+    "id": "world.time",
+    "pattern": "the time is {int}:{int}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets and freezes the in-game time (server-wide); restored after the run.",
+    "args": [
+      {
+        "name": "hour",
+        "type": "int",
+        "min": 0,
+        "max": 23
+      },
+      {
+        "name": "minute",
+        "type": "int",
+        "min": 0,
+        "max": 59
+      }
+    ],
+    "undo": true,
+    "example": "Given the time is 22:30"
+  },
+  {
+    "id": "world.weather",
+    "pattern": "the weather is {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Sets the weather (server-wide); restored after the run.",
+    "args": [
+      {
+        "name": "weather",
+        "type": "string",
+        "allow": "weather"
+      }
+    ],
+    "undo": true,
+    "example": "Given the weather is \"RAIN\""
+  },
+  {
+    "id": "fixture.run",
+    "pattern": "I run setup {string}",
+    "kind": "setup",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Runs a named composite fixture from the resource's tests/qa.lua.",
+    "args": [
+      {
+        "name": "fixture",
+        "type": "string",
+        "allow": "fixtures"
+      }
+    ],
+    "undo": true,
+    "example": "Given I run setup \"fishing_ready\""
+  },
+  {
+    "id": "wait.seconds",
+    "pattern": "I wait {int} second(s)",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Waits N seconds, then continues on its own.",
+    "args": [
+      {
+        "name": "seconds",
+        "type": "int",
+        "cap": "maxWaitSeconds",
+        "min": 1
+      }
+    ],
+    "undo": false,
+    "example": "When I wait 5 seconds"
+  },
+  {
+    "id": "command.run",
+    "pattern": "I run the command {string}",
+    "kind": "observed",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I type the command (or press \"Run it for me\" when the command is allowed). Verified when a Kora.commands handler runs.",
+    "args": [
+      {
+        "name": "command",
+        "type": "string",
+        "allow": "commands"
+      }
+    ],
+    "undo": false,
+    "example": "When I run the command \"/id\""
+  },
+  {
+    "id": "item.use",
+    "pattern": "I use a/an/the {string}",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I use the item from my inventory; verified by kora_inventory's used-item event.",
+    "args": [
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": false,
+    "example": "When I use a \"bandage\""
+  },
+  {
+    "id": "inventory.open_mine",
+    "pattern": "I open my inventory",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I open my own inventory; verified by kora_inventory's session event.",
+    "args": [],
+    "undo": false,
+    "example": "When I open my inventory"
+  },
+  {
+    "id": "vehicle.lock_action",
+    "pattern": "I lock the vehicle",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I lock the vehicle; verified by kora_vehiclekeys' lock state.",
+    "args": [],
+    "undo": false,
+    "example": "When I lock the vehicle"
+  },
+  {
+    "id": "vehicle.unlock_action",
+    "pattern": "I unlock the vehicle",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I unlock the vehicle; verified by kora_vehiclekeys' lock state.",
+    "args": [],
+    "undo": false,
+    "example": "When I unlock the vehicle"
+  },
+  {
+    "id": "vehicle.enter",
+    "pattern": "I get in the vehicle",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I get into a vehicle (the spawned one if there is one).",
+    "args": [],
+    "undo": false,
+    "example": "When I get in the vehicle"
+  },
+  {
+    "id": "vehicle.exit",
+    "pattern": "I get out of the vehicle",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I leave the vehicle I am in.",
+    "args": [],
+    "undo": false,
+    "example": "When I get out of the vehicle"
+  },
+  {
+    "id": "location.go",
+    "pattern": "I go to {string}",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I move to a named location (within its radius, default 5 m).",
+    "args": [
+      {
+        "name": "location",
+        "type": "string",
+        "allow": "locations"
+      }
+    ],
+    "undo": false,
+    "example": "When I go to \"fish_market\""
+  },
+  {
+    "id": "mark.fires",
+    "pattern": "the {string} mark fires",
+    "kind": "observed",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Waits for a Kora.qa.mark with this name from the scenario's resources.",
+    "args": [
+      {
+        "name": "mark",
+        "type": "string",
+        "allow": "marks"
+      }
+    ],
+    "undo": false,
+    "example": "When the \"fishing:caught\" mark fires"
+  },
+  {
+    "id": "target.option",
+    "pattern": "I select the {string} target option",
+    "kind": "observed",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I use a kora_target option with this label (verified by a \"target:option\" mark when kora_target emits it).",
+    "args": [
+      {
+        "name": "label",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "When I select the \"Open trunk\" target option"
+  },
+  {
+    "id": "items.count",
+    "pattern": "I should have {int} {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My inventory holds exactly N of the item.",
+    "args": [
+      {
+        "name": "count",
+        "type": "int",
+        "min": 0,
+        "cap": "maxItemCount"
+      },
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should have 2 \"fish_cod\""
+  },
+  {
+    "id": "items.none_check",
+    "pattern": "I should have no {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My inventory holds none of the item.",
+    "args": [
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should have no \"lockpick\""
+  },
+  {
+    "id": "items.changed",
+    "pattern": "my {string} count should have changed by {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The item count changed by N (may be negative) since the run started.",
+    "args": [
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      },
+      {
+        "name": "delta",
+        "type": "int",
+        "min": -1000,
+        "max": 1000
+      }
+    ],
+    "undo": false,
+    "example": "Then my \"water\" count should have changed by -1"
+  },
+  {
+    "id": "money.changed",
+    "pattern": "my {word} balance should have changed by {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The account changed by N (may be negative) since the run started.",
+    "args": [
+      {
+        "name": "account",
+        "type": "word",
+        "allow": "accounts"
+      },
+      {
+        "name": "delta",
+        "type": "int",
+        "min": -10000000,
+        "max": 10000000
+      }
+    ],
+    "undo": false,
+    "example": "Then my cash balance should have changed by -250"
+  },
+  {
+    "id": "money.equals",
+    "pattern": "my {word} balance should be {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The account holds exactly N.",
+    "args": [
+      {
+        "name": "account",
+        "type": "word",
+        "allow": "accounts"
+      },
+      {
+        "name": "amount",
+        "type": "int",
+        "min": 0,
+        "max": 1000000000
+      }
+    ],
+    "undo": false,
+    "example": "Then my bank balance should be 9750"
+  },
+  {
+    "id": "money.at_least_check",
+    "pattern": "my {word} balance should be at least {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The account holds at least N.",
+    "args": [
+      {
+        "name": "account",
+        "type": "word",
+        "allow": "accounts"
+      },
+      {
+        "name": "amount",
+        "type": "int",
+        "min": 0,
+        "max": 1000000000
+      }
+    ],
+    "undo": false,
+    "example": "Then my cash balance should be at least 100"
+  },
+  {
+    "id": "location.at",
+    "pattern": "I should be at {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am within the named location's radius (default 5 m).",
+    "args": [
+      {
+        "name": "location",
+        "type": "string",
+        "allow": "locations"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should be at \"hospital_bed\""
+  },
+  {
+    "id": "location.near",
+    "pattern": "I should be within {int} metres of {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am within N metres of the named location.",
+    "args": [
+      {
+        "name": "metres",
+        "type": "int",
+        "min": 1,
+        "max": 5000
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "allow": "locations"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should be within 20 metres of \"pillbox\""
+  },
+  {
+    "id": "vehicle.in_any",
+    "pattern": "I should be in a vehicle",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am sitting in any vehicle.",
+    "args": [],
+    "undo": false,
+    "example": "Then I should be in a vehicle"
+  },
+  {
+    "id": "vehicle.in_model",
+    "pattern": "I should be in a {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am sitting in a vehicle of this model (or alias).",
+    "args": [
+      {
+        "name": "model",
+        "type": "string",
+        "allow": "vehicles"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should be in a \"sultan\""
+  },
+  {
+    "id": "vehicle.locked_check",
+    "pattern": "the vehicle should be locked",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The vehicle's lock state is locked.",
+    "args": [],
+    "undo": false,
+    "example": "Then the vehicle should be locked"
+  },
+  {
+    "id": "vehicle.unlocked_check",
+    "pattern": "the vehicle should be unlocked",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The vehicle's lock state is unlocked.",
+    "args": [],
+    "undo": false,
+    "example": "Then the vehicle should be unlocked"
+  },
+  {
+    "id": "job.is",
+    "pattern": "my job should be {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My job has this name.",
+    "args": [
+      {
+        "name": "job",
+        "type": "string",
+        "allow": "jobs"
+      }
+    ],
+    "undo": false,
+    "example": "Then my job should be \"unemployed\""
+  },
+  {
+    "id": "job.grade_is",
+    "pattern": "my job should be {string} at grade {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My job has this name and grade.",
+    "args": [
+      {
+        "name": "job",
+        "type": "string",
+        "allow": "jobs"
+      },
+      {
+        "name": "grade",
+        "type": "int",
+        "min": 1,
+        "max": 20
+      }
+    ],
+    "undo": false,
+    "example": "Then my job should be \"police\" at grade 2"
+  },
+  {
+    "id": "job.on_duty_check",
+    "pattern": "I should be on duty",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am on duty.",
+    "args": [],
+    "undo": false,
+    "example": "Then I should be on duty"
+  },
+  {
+    "id": "job.off_duty_check",
+    "pattern": "I should be off duty",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am off duty.",
+    "args": [],
+    "undo": false,
+    "example": "Then I should be off duty"
+  },
+  {
+    "id": "gang.is",
+    "pattern": "my gang should be {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My gang has this name.",
+    "args": [
+      {
+        "name": "gang",
+        "type": "string",
+        "allow": "gangs"
+      }
+    ],
+    "undo": false,
+    "example": "Then my gang should be \"none\""
+  },
+  {
+    "id": "metadata.is",
+    "pattern": "my metadata {string} should be {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A player metadata value equals this (compared as text).",
+    "args": [
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "metadataKeys"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "maxLength": 100
+      }
+    ],
+    "undo": false,
+    "example": "Then my metadata \"isdead\" should be \"false\""
+  },
+  {
+    "id": "health.alive",
+    "pattern": "I should be alive",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My character is alive.",
+    "args": [],
+    "undo": false,
+    "example": "Then I should be alive"
+  },
+  {
+    "id": "health.dead_check",
+    "pattern": "I should be dead",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My character is dead or downed.",
+    "args": [],
+    "undo": false,
+    "example": "Then I should be dead"
+  },
+  {
+    "id": "weapon.equipped_check",
+    "pattern": "I should have a {string} equipped",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The weapon is in my hands.",
+    "args": [
+      {
+        "name": "weapon",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should have a \"weapon_pistol\" equipped"
+  },
+  {
+    "id": "notify.contains",
+    "pattern": "I should see a notification containing {string}",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A notification (title or message) containing the text was shown since the last action step.",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should see a notification containing \"This vehicle is locked.\""
+  },
+  {
+    "id": "nui.app",
+    "pattern": "the {string} app opens",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The kora_lib AppShell app with this id was opened since the last action step.",
+    "args": [
+      {
+        "name": "app",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the \"kora_banking:atm\" app opens"
+  },
+  {
+    "id": "nui.menu",
+    "pattern": "a menu titled {string} opens",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A kora_lib menu or input dialog with this title was opened since the last action step.",
+    "args": [
+      {
+        "name": "title",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then a menu titled \"Fish market\" opens"
+  },
+  {
+    "id": "inventory.opens",
+    "pattern": "the {string} inventory opens",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A kora_inventory session opened with this secondary inventory type (trunk, glovebox, stash, shop, drop, player).",
+    "args": [
+      {
+        "name": "type",
+        "type": "string",
+        "allow": "inventoryTypes"
+      }
+    ],
+    "undo": false,
+    "example": "Then the \"trunk\" inventory opens"
+  },
+  {
+    "id": "callback.called",
+    "pattern": "the {string} callback is called",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The server callback (Kora.callback) was called by me since the last action step.",
+    "args": [
+      {
+        "name": "callback",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the \"kora_fishing:sell\" callback is called"
+  },
+  {
+    "id": "errors.none",
+    "pattern": "there should be no script errors",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "No SCRIPT ERROR lines in the server console since the last action step.",
+    "args": [],
+    "undo": false,
+    "example": "Then there should be no script errors",
+    "eventual": false
+  },
+  {
+    "id": "vehicle.engine_on",
+    "pattern": "the vehicle engine is on/running",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Starts the vehicle's engine (restored after the run).",
+    "args": [],
+    "undo": true,
+    "example": "Given the vehicle engine is running"
+  },
+  {
+    "id": "vehicle.engine_off",
+    "pattern": "the vehicle engine is off",
+    "kind": "setup",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Stops the vehicle's engine (restored after the run).",
+    "args": [],
+    "undo": true,
+    "example": "Given the vehicle engine is off"
+  },
+  {
+    "id": "key.press",
+    "pattern": "I press the {string} key",
+    "kind": "observed",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I press a key. Auto-verified for common keys (E, F, G, TAB, ALT, F1-F11, arrows, ...) by watching the matching game control; other keys need Done.",
+    "args": [
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "keys"
+      }
+    ],
+    "undo": false,
+    "example": "When I press the \"F7\" key"
+  },
+  {
+    "id": "vehicle.engine_on_action",
+    "pattern": "I turn the engine on",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I start the vehicle's engine; verified from the engine state.",
+    "args": [],
+    "undo": false,
+    "example": "When I turn the engine on"
+  },
+  {
+    "id": "vehicle.engine_off_action",
+    "pattern": "I turn the engine off",
+    "kind": "observed",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I stop the vehicle's engine; verified from the engine state.",
+    "args": [],
+    "undo": false,
+    "example": "When I turn the engine off"
+  },
+  {
+    "id": "mark.fires_with",
+    "pattern": "the {string} mark fires with {string} = {string}",
+    "kind": "observed",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Waits for a Kora.qa.mark with this name whose data field (dotted path allowed) equals the value (compared as text).",
+    "args": [
+      {
+        "name": "mark",
+        "type": "string",
+        "allow": "marks"
+      },
+      {
+        "name": "field",
+        "type": "string",
+        "allow": "text",
+        "maxLength": 64
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "When the \"fishing:caught\" mark fires with \"fish\" = \"cod\""
+  },
+  {
+    "id": "mark.fires_within",
+    "pattern": "the {string} mark fires within {int} seconds",
+    "kind": "observed",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "Waits for a Kora.qa.mark with this name; fails on its own if it hasn't fired N seconds after the step started.",
+    "args": [
+      {
+        "name": "mark",
+        "type": "string",
+        "allow": "marks"
+      },
+      {
+        "name": "seconds",
+        "type": "int",
+        "min": 1,
+        "cap": "maxWaitSeconds"
+      }
+    ],
+    "undo": false,
+    "example": "When the \"dispatch:created\" mark fires within 10 seconds"
+  },
+  {
+    "id": "progress.cancel_action",
+    "pattern": "I cancel the progress bar",
+    "kind": "observed",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I cancel the running kora_lib progress bar; verified when it is cancelled.",
+    "args": [],
+    "undo": false,
+    "example": "When I cancel the progress bar"
+  },
+  {
+    "id": "vehicle.engine_on_check",
+    "pattern": "the vehicle engine should be on/running",
+    "kind": "check",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The vehicle's engine is running.",
+    "args": [],
+    "undo": false,
+    "example": "Then the vehicle engine should be running"
+  },
+  {
+    "id": "vehicle.engine_off_check",
+    "pattern": "the vehicle engine should be off",
+    "kind": "check",
+    "side": "both",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The vehicle's engine is off.",
+    "args": [],
+    "undo": false,
+    "example": "Then the vehicle engine should be off"
+  },
+  {
+    "id": "vehicle.driver_check",
+    "pattern": "I should be in the driver seat",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "I am the driver of the vehicle I'm in.",
+    "args": [],
+    "undo": false,
+    "example": "Then I should be in the driver seat"
+  },
+  {
+    "id": "vehicle.deleted_check",
+    "pattern": "the vehicle should be deleted",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The vehicle spawned by this run no longer exists.",
+    "args": [],
+    "undo": false,
+    "example": "Then the vehicle should be deleted"
+  },
+  {
+    "id": "vehicle.fuel_check",
+    "pattern": "the vehicle fuel should be {int}%",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The vehicle's fuel level is N% (within 2%).",
+    "args": [
+      {
+        "name": "percent",
+        "type": "int",
+        "min": 0,
+        "max": 100
+      }
+    ],
+    "undo": false,
+    "example": "Then the vehicle fuel should be 50%"
+  },
+  {
+    "id": "chat.shows",
+    "pattern": "the chat should show {string}",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A chat message containing the text arrived since the last action step (kora_chat chat:addMessage / chatMessage / qbchat:message).",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the chat should show \"Welcome\""
+  },
+  {
+    "id": "hud.visible",
+    "pattern": "the HUD should be visible",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "kora_hud reports the HUD as visible.",
+    "args": [],
+    "undo": false,
+    "example": "Then the HUD should be visible"
+  },
+  {
+    "id": "hud.hidden",
+    "pattern": "the HUD should be hidden",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "kora_hud reports the HUD as hidden.",
+    "args": [],
+    "undo": false,
+    "example": "Then the HUD should be hidden"
+  },
+  {
+    "id": "hud.seatbelt_on",
+    "pattern": "the seatbelt indicator should be on",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My seatbelt is fastened (kora_utils seatbelt state, which the HUD indicator shows).",
+    "args": [],
+    "undo": false,
+    "example": "Then the seatbelt indicator should be on"
+  },
+  {
+    "id": "hud.seatbelt_off",
+    "pattern": "the seatbelt indicator should be off",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My seatbelt is not fastened.",
+    "args": [],
+    "undo": false,
+    "example": "Then the seatbelt indicator should be off"
+  },
+  {
+    "id": "hud.minimap_visible",
+    "pattern": "the minimap should be visible",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The minimap/radar is shown.",
+    "args": [],
+    "undo": false,
+    "example": "Then the minimap should be visible"
+  },
+  {
+    "id": "hud.minimap_hidden",
+    "pattern": "the minimap should be hidden",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The minimap/radar is hidden.",
+    "args": [],
+    "undo": false,
+    "example": "Then the minimap should be hidden"
+  },
+  {
+    "id": "hud.shows",
+    "pattern": "the HUD should show {string}",
+    "kind": "manual",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The HUD's content can't be read by kora_qa: the tester answers Pass or Fail.",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the HUD should show \"100%\""
+  },
+  {
+    "id": "nui.app_open",
+    "pattern": "the {string} app should be open",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The kora_lib AppShell app with this id is open right now (ids: shared/ui-ids.json).",
+    "args": [
+      {
+        "name": "app",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the \"qbmdt:terminal\" app should be open"
+  },
+  {
+    "id": "console.server_shows",
+    "pattern": "the server console should show {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A server console line containing the text was printed since the last action step.",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the server console should show \"Loaded 12 doors\""
+  },
+  {
+    "id": "console.f8_shows",
+    "pattern": "the F8 console should show {string}",
+    "kind": "manual",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The client F8 console can't be captured: the tester checks it and answers Pass or Fail.",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the F8 console should show \"kora_lib loaded\""
+  },
+  {
+    "id": "console.f8_clean",
+    "pattern": "the F8 console should show no errors",
+    "kind": "manual",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The tester checks the F8 console for script errors and answers Pass or Fail.",
+    "args": [],
+    "undo": false,
+    "example": "Then the F8 console should show no errors"
+  },
+  {
+    "id": "notify.titled",
+    "pattern": "I should see a notification titled {string}",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A notification whose title contains the text was shown since the last action step.",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should see a notification titled \"Vehicle\""
+  },
+  {
+    "id": "notify.type",
+    "pattern": "I should see a/an {word} notification",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A notification of this type (info, success, warning, error) was shown since the last action step.",
+    "args": [
+      {
+        "name": "type",
+        "type": "word",
+        "allow": "notifyTypes"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should see an error notification"
+  },
+  {
+    "id": "progress.shown",
+    "pattern": "a progress bar should run",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A kora_lib progress bar started since the last action step.",
+    "args": [],
+    "undo": false,
+    "example": "Then a progress bar should run"
+  },
+  {
+    "id": "progress.labelled",
+    "pattern": "a progress bar labelled {string} should run",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A kora_lib progress bar whose label contains the text started since the last action step.",
+    "args": [
+      {
+        "name": "label",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then a progress bar labelled \"Fishing\" should run"
+  },
+  {
+    "id": "textui.shows",
+    "pattern": "the text UI should show {string}",
+    "kind": "check",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "The kora_lib text UI showed text containing this since the last action step.",
+    "args": [
+      {
+        "name": "text",
+        "type": "string",
+        "allow": "text"
+      }
+    ],
+    "undo": false,
+    "example": "Then the text UI should show \"[E] Open door\""
+  },
+  {
+    "id": "health.armour_check",
+    "pattern": "my armour should be {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My armour equals N.",
+    "args": [
+      {
+        "name": "armour",
+        "type": "int",
+        "min": 0,
+        "max": 100
+      }
+    ],
+    "undo": false,
+    "example": "Then my armour should be 100"
+  },
+  {
+    "id": "items.at_least",
+    "pattern": "I should have at least {int} {string}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "My inventory holds at least N of the item.",
+    "args": [
+      {
+        "name": "count",
+        "type": "int",
+        "min": 0,
+        "cap": "maxItemCount"
+      },
+      {
+        "name": "item",
+        "type": "string",
+        "allow": "items"
+      }
+    ],
+    "undo": false,
+    "example": "Then I should have at least 1 \"fish_cod\""
+  },
+  {
+    "id": "metadata.changed",
+    "pattern": "my metadata {string} should have changed by {int}",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A numeric player metadata value changed by N since the run started.",
+    "args": [
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "metadataKeys"
+      },
+      {
+        "name": "delta",
+        "type": "int",
+        "min": -100000,
+        "max": 100000
+      }
+    ],
+    "undo": false,
+    "example": "Then my metadata \"hunger\" should have changed by 20"
+  },
+  {
+    "id": "metadata.increased",
+    "pattern": "my metadata {string} should have increased",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A numeric player metadata value is higher than when the run started.",
+    "args": [
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "metadataKeys"
+      }
+    ],
+    "undo": false,
+    "example": "Then my metadata \"thirst\" should have increased"
+  },
+  {
+    "id": "metadata.decreased",
+    "pattern": "my metadata {string} should have decreased",
+    "kind": "check",
+    "side": "server",
+    "resource": "kora_qa",
+    "priority": 0,
+    "description": "A numeric player metadata value is lower than when the run started.",
+    "args": [
+      {
+        "name": "key",
+        "type": "string",
+        "allow": "metadataKeys"
+      }
+    ],
+    "undo": false,
+    "example": "Then my metadata \"stress\" should have decreased"
+  },
+  {
+    "id": "manual.do",
+    "pattern": "I manually: {}",
+    "kind": "manual",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": -100,
+    "description": "Anything the library can't automate: the tester does it and presses Done.",
+    "args": [
+      {
+        "name": "instruction",
+        "type": "any",
+        "maxLength": 500
+      }
+    ],
+    "undo": false,
+    "example": "When I manually: sit inside and open the vehicle storage"
+  },
+  {
+    "id": "manual.confirm",
+    "pattern": "I confirm: {}",
+    "kind": "manual",
+    "side": "client",
+    "resource": "kora_qa",
+    "priority": -100,
+    "description": "Anything the library can't check: the tester answers Pass or Fail.",
+    "args": [
+      {
+        "name": "expectation",
+        "type": "any",
+        "maxLength": 500
+      }
+    ],
+    "undo": false,
+    "example": "Then I confirm: storage from inside opens even when locked"
+  }
+]
