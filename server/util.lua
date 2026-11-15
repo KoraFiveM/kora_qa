@@ -12,8 +12,9 @@ U.RESOURCE = RESOURCE
 local epochBase = os.time() * 1000 - GetGameTimer()
 function U.now() return epochBase + GetGameTimer() end
 
-function U.log(fmt, ...)
-    print(('[kora_qa] ' .. fmt):format(...))
+---Diagnostic log through Kora.logging. level: trace|debug|info|warn|error|fatal.
+function U.log(level, event, message, fields)
+    return Kora.logging[level](event, message, fields)
 end
 
 function U.enabled()

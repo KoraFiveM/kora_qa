@@ -19,4 +19,7 @@ for file in "$dir"/smoke/*.lua; do
     if ! (cd "$root" && "$lua_bin" "$file" | grep -v '^\[kora_qa\]'; exit "${PIPESTATUS[0]}"); then status=1; fi
     echo
 done
+echo "== no_raw_print =="
+(cd "$root" && "$lua_bin" test/no_raw_print.lua) || status=1
+
 exit "$status"

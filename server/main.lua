@@ -191,7 +191,7 @@ Kora.events.register('kora_qa:action', function(src, action, data)
         local ok, err = pcall(ACTIONS[action], src, data)
         if exclusive then busy[src] = nil end
         if not ok then
-            U.log('action %s from %d failed: %s', action, src, tostring(err))
+            U.log('error', 'action.failed', 'Client action failed', { action = tostring(action), playerId = src, error = tostring(err) })
             E.notice(src, 'Something went wrong (see the server console).', 'destructive')
         end
     end)
@@ -246,7 +246,7 @@ CTL.restart = function(body)
         return 404, { error = 'unknown resource' }
     end
     if protected(name) then return 403, { error = 'protected resource' } end
-    U.log('ctl: restarting %s (requested by the QA panel)', name)
+    U.log('info', 'ctl.restart_requested', 'Restarting a resource at the QA panel request', { resource = name })
     ExecuteCommand('ensure ' .. name)
     return 200, { ok = true }
 end
@@ -288,7 +288,7 @@ SetHttpHandler(function(req, res)
         end
         local ok, code, result = pcall(CTL[body.cmd], body)
         if not ok then
-            U.log('ctl %s failed: %s', body.cmd, tostring(code))
+            U.log('error', 'ctl.command_failed', 'Panel control command failed', { command = tostring(body.cmd), error = tostring(code) })
             return json(res, 500, { error = 'internal error' })
         end
         json(res, code, result)
@@ -317,7 +317,7 @@ AddEventHandler('onResourceStop', function(resource)
         for _, record in ipairs(run.undo) do
             if record.data and record.data.entity then QA.game.deleteEntity(record.data.entity) end
         end
-        U.log('kora_qa stopping: run %s for %d abandoned (entities removed)', run.localId, src)
+        U.log('warn', 'run.abandoned_on_stop', 'Resource stopping; run abandoned and entities removed', { runId = run.localId, playerId = src })
     end
 end)
 
@@ -352,18 +352,18 @@ end)
 
 CreateThread(function()
     if not U.enabled() then
-        U.log('disabled (set %s 1 to enable)', Config.convars.enabled)
+        U.log('info', 'startup.disabled', 'kora_qa is disabled; set the enable convar to 1 to enable', { convar = Config.convars.enabled })
         return
     end
-    if not P.configured() then U.log('WARNING: %s is not set; the panel cannot be reached', Config.convars.secret) end
+    if not P.configured() then U.log('warn', 'startup.panel_secret_missing', 'Panel secret convar is not set; the panel cannot be reached', { convar = Config.convars.secret }) end
     Reg.loadScenarioCache()
     local count = Reg.loadAllAliases()
-    U.log('loaded aliases from %d resource(s); %d built-in step(s)', count, #QA.catalog.list)
+    U.log('info', 'startup.aliases_loaded', 'Loaded aliases and built-in steps', { resources = count, builtInSteps = #QA.catalog.list })
     QA.observers.attachKoraLib()
     Reg.post()
     Reg.refreshScenarios()
     P.request('POST', '/server-started', {}, function(status, data)
-        if P.ok(status) then U.log('server-started reported (%s issue(s) moved to awaiting_test)', tostring(type(data) == 'table' and data.moved or 0)) end
+        if P.ok(status) then U.log('info', 'startup.server_started_reported', 'Server start reported to the panel', { issuesMoved = tostring(type(data) == 'table' and data.moved or 0) }) end
     end)
     P.flush()
     while true do

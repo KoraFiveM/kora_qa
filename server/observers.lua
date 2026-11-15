@@ -13,14 +13,14 @@ local function attachKoraLib()
     if not U.started('kora_lib') then return end
     local ok, id = pcall(Kora.qa.onEvent, function(src, event)
         local okCall, err = pcall(E.onEvent, src, event)
-        if not okCall then U.log('event handler failed: %s', tostring(err)) end
+        if not okCall then U.log('error', 'observers.event_handler_failed', 'Event handler failed', { error = tostring(err) }) end
     end)
     if ok then
         handlerId = id
         -- A kora_lib restart forgets which players were active.
         for src in pairs(R.bySrc) do pcall(Kora.qa.setActive, src, true) end
     else
-        U.log('could not attach to Kora.qa (kora_lib too old?): %s', tostring(id))
+        U.log('warn', 'observers.attach_failed', 'Could not attach to Kora.qa (kora_lib too old?)', { error = tostring(id) })
     end
 end
 
@@ -115,7 +115,7 @@ if type(RegisterConsoleListener) == 'function' then
         if not ok then ring[#ring + 1] = { at = U.now(), channel = 'kora_qa', line = 'console tap failed: ' .. tostring(err) } end
     end)
 else
-    U.log('RegisterConsoleListener is unavailable; console lines will not be captured')
+    U.log('warn', 'observers.console_listener_unavailable', 'RegisterConsoleListener is unavailable; console lines will not be captured')
 end
 
 QA.observers = { attachKoraLib = attachKoraLib, onConsole = onConsole }
