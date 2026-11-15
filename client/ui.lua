@@ -488,7 +488,7 @@ local function register()
         onAction = onAction,
     })
     registered = ok
-    if not ok then print(('[kora_qa] runner app not registered: %s'):format(tostring(err))) end
+    if not ok then Kora.logging.error('ui.app_register_failed', 'Runner app not registered', { error = tostring(err) }) end
 end
 
 local function open(viewId)

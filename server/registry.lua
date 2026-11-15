@@ -12,7 +12,7 @@ local function loadBuiltins()
     local defs = U.jsonDecode(LoadResourceFile(U.RESOURCE, 'shared/steps.json'))
     assert(type(defs) == 'table', 'shared/steps.json is missing or invalid JSON')
     local catalog, errors = QACatalog.new(defs)
-    for _, err in ipairs(errors) do U.log('steps.json: %s', err) end
+    for _, err in ipairs(errors) do U.log('error', 'registry.steps_json_invalid', 'steps.json entry rejected', { error = tostring(err) }) end
     return catalog
 end
 
@@ -100,12 +100,12 @@ function Reg.loadAliasesFor(resource)
     end
     local raw, err = Reg.sandboxLoad(source, ('@@%s/tests/qa.lua'):format(resource))
     if not raw then
-        U.log('%s/tests/qa.lua: %s', resource, tostring(err))
+        U.log('error', 'registry.alias_file_failed', 'Resource tests/qa.lua failed to load', { resource = resource, error = tostring(err) })
         QA.aliases[resource] = nil
         return false
     end
     QA.aliases[resource] = Reg.cleanAliases(raw, function(message)
-        U.log('%s/tests/qa.lua: %s', resource, message)
+        U.log('error', 'registry.alias_file_errored', 'Resource tests/qa.lua errored', { resource = resource, error = tostring(message) })
     end)
     return true
 end
@@ -149,9 +149,9 @@ function Reg.post()
             caps = Config.caps,
         }, function(status)
             if P.ok(status) then
-                U.log('registry posted (%d steps)', #QA.catalog.list)
+                U.log('info', 'registry.posted', 'Step registry posted', { steps = #QA.catalog.list })
             else
-                U.log('registry post failed (HTTP %s); will retry when the panel is back', tostring(status))
+                U.log('warn', 'registry.post_failed', 'Registry post failed; will retry when the panel is back', { status = tostring(status) })
             end
         end)
     end)
@@ -233,7 +233,7 @@ function Reg.refreshScenarios(done)
             if data.hash ~= QA.scenarios.hash or #QA.scenarios.list == 0 then
                 setScenarios(data)
                 U.writeJsonFile(CACHE, data)
-                U.log('%d scenario(s) loaded from the panel', #QA.scenarios.list)
+                U.log('info', 'registry.scenarios_loaded', 'Scenarios loaded from the panel', { scenarios = #QA.scenarios.list })
             else
                 QA.scenarios.fetchedAt = os.time()
             end

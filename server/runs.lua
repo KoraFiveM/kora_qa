@@ -351,7 +351,7 @@ function R.teardown(run)
         end
     end)
     for _, entry in ipairs(log) do
-        if not entry.ok then U.log('teardown of %s (step %s) for run %s failed: %s', entry.id, tostring(entry.idx), run.localId, tostring(entry.error)) end
+        if not entry.ok then U.log('error', 'run.teardown_failed', 'Step teardown failed', { entryId = entry.id, step = tostring(entry.idx), runId = run.localId, error = tostring(entry.error) }) end
     end
     return log
 end

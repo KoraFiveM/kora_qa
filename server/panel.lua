@@ -125,13 +125,13 @@ function P.enqueue(job)
     job.id = job.id or U.randomId('q')
     job.queuedAt = U.now()
     if not U.writeJsonFile(('queue/%s.json'):format(job.id), job) then
-        U.log('could not write queue/%s.json -- report lost: %s', job.id, U.jsonEncode(job) or '?')
+        U.log('error', 'queue.write_failed', 'Could not write queued job to disk; report lost', { jobId = job.id, kind = job.kind })
         return nil
     end
     local index = loadIndex()
     index[#index + 1] = job.id
     saveIndex(index)
-    U.log('panel unreachable; queued %s (%s). %d job(s) waiting.', job.id, job.kind, #index)
+    U.log('warn', 'panel.unreachable_queued', 'Panel unreachable; job queued', { jobId = job.id, kind = job.kind, waiting = #index })
     return job.id
 end
 
@@ -171,7 +171,7 @@ function P.runJob(job)
             local status, data = P.call('POST', '/runs', job.start)
             if not reachable(status) then return false end
             if not P.ok(status) or type(data) ~= 'table' or data.runId == nil then
-                U.log('queued run %s rejected by the panel (HTTP %s)', job.id, status)
+                U.log('warn', 'queue.run_rejected', 'Queued run rejected by the panel', { jobId = job.id, status = status })
                 return true
             end
             job.runId = data.runId
@@ -196,14 +196,14 @@ function P.runJob(job)
             local status, data = P.call('POST', '/issues', job.body)
             if not reachable(status) then return false end
             if not P.ok(status) or type(data) ~= 'table' then
-                U.log('queued issue %s rejected by the panel (HTTP %s)', job.id, status)
+                U.log('warn', 'queue.issue_rejected', 'Queued issue rejected by the panel', { jobId = job.id, status = status })
                 return true
             end
             job.issueId = data.issueId
         end
         return uploadShot(job, job.issueId, nil)
     end
-    U.log('dropping queued job %s with unknown kind %s', tostring(job.id), tostring(job.kind))
+    U.log('warn', 'queue.unknown_kind_dropped', 'Dropping queued job with unknown kind', { jobId = tostring(job.id), kind = tostring(job.kind) })
     return true
 end
 
@@ -222,7 +222,7 @@ function P.flush()
                     local done = P.runJob(job)
                     if done then
                         removeJob(id)
-                        U.log('delivered queued %s', id)
+                        U.log('info', 'queue.job_delivered', 'Delivered queued job', { jobId = id })
                     else
                         job.attempts = (job.attempts or 0) + 1
                         U.writeJsonFile(rel, job)
@@ -231,7 +231,7 @@ function P.flush()
                 end
             end
         end)
-        if not ok then U.log('queue flush failed: %s', tostring(err)) end
+        if not ok then U.log('error', 'queue.flush_failed', 'Queue flush failed', { error = tostring(err) }) end
         queueBusy = false
     end)
 end

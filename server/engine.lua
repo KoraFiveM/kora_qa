@@ -110,7 +110,7 @@ function E.start(src, scenarioId, retestIssueId)
 
     R.bySrc[src] = run
     pcall(Kora.qa.setActive, src, true)
-    U.log('run %s started by %s (%d): %s', run.localId, run.name, src, scenario.id)
+    U.log('info', 'run.started', 'Run started', { runId = run.localId, playerId = src, scenarioId = scenario.id })
 
     run.startBody = {
         scenarioId = scenario.id, scenarioHash = scenario.hash, discordId = discordId or '',
@@ -129,7 +129,7 @@ function E.start(src, scenarioId, retestIssueId)
             end
             E.push(run)
         else
-            U.log('run %s: panel did not register the run (HTTP %s); results will be queued', run.localId, tostring(status))
+            U.log('warn', 'run.panel_register_failed', 'Panel did not register the run; results will be queued', { runId = run.localId, status = tostring(status) })
         end
     end)
 
@@ -266,7 +266,7 @@ CreateThread(function()
                         end
                     end
                 end)
-                if not ok then U.log('observer for %s failed: %s', tostring(step.defId), tostring(err)) end
+                if not ok then U.log('error', 'run.observer_failed', 'Step observer failed', { stepId = tostring(step.defId), error = tostring(err) }) end
             end
         end
     end
@@ -363,8 +363,13 @@ function E.setup(run, i, chained)
     local ok, detail = runSetupDef(run, step, def, params)
     run.busy = false
     run.windowStart = U.now()
-    U.log('setup run=%s player=%s step=%d %s %s: %s', run.id or run.localId, tostring(run.src), step.idx, def.id,
-        ok and 'ok' or 'FAILED', tostring(detail))
+    U.log(ok and 'info' or 'error', ok and 'run.step_setup_ok' or 'run.step_setup_failed', ok and 'Step setup finished' or 'Step setup failed', {
+        runId = run.id or run.localId,
+        playerId = tostring(run.src),
+        step = step.idx,
+        stepId = def.id,
+        detail = tostring(detail),
+    })
     R.addTimeline(run, 'setup', def.id, { idx = step.idx, ok = ok, detail = detail })
     if R.get(run.src) ~= run then return false, 'run ended' end
     if ok then
@@ -562,7 +567,7 @@ function E.finish(run, status, opts)
     end
 
     remember(run, status, issueId)
-    U.log('run %s (%s) finished: %s%s', run.id or run.localId, run.scenario.id, status, issueId and (' -> issue ' .. issueId) or '')
+    U.log('info', 'run.finished', 'Run finished', { runId = run.id or run.localId, scenarioId = run.scenario.id, status = status, issueId = issueId })
     if online then
         Kora.events.push(src, 'kora_qa:finished', {
             status = status, issueId = issueId, url = url, queued = queued == true,
@@ -610,7 +615,7 @@ function E.freeform(src, data)
                 P.enqueue({ kind = 'issue', issueId = result.issueId, screenshot = shot })
             end
         end
-        U.log('freeform report from %s (%d) -> issue %s', U.playerName(src), src, tostring(result.issueId))
+        U.log('info', 'report.freeform_filed', 'Freeform report filed', { playerId = src, issueId = tostring(result.issueId) })
         return true, { issueId = result.issueId, url = result.url }
     end
     if P.reachable(status) then
